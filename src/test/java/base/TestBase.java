@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class TestBase {
-
     public static WebDriver driver;
     public static Properties config = new Properties();
     public static Properties OR = new Properties();
