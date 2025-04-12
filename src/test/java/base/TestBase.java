@@ -2,6 +2,7 @@ package base;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
 public class TestBase {
@@ -45,9 +47,19 @@ public class TestBase {
             driver.get(config.getProperty("testsiteurl"));
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(config.getProperty("implicit.wait"))));
-
         }
     }
+    public boolean isElementPresent(By by)
+    {
+        try {
+            driver.findElement(by);
+            return true;
+        }
+        catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
     @AfterSuite
     public void tearDown() throws Exception {
         if(driver != null) {
