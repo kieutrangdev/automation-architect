@@ -109,13 +109,8 @@ public class ExcelReader {
 		           cellText = cal.get(Calendar.DAY_OF_MONTH) + "/" +
 		                      cal.get(Calendar.MONTH)+1 + "/" + 
 		                      cellText;
-		           
-		          
-
 		         }
 
-			  
-			  
 			  return cellText;
 		  }else if(cell.getCellType()==Cell.CELL_TYPE_BLANK)
 		      return ""; 
