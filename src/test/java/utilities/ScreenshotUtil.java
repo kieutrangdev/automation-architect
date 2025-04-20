@@ -1,0 +1,28 @@
+package utilities;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import base.TestBase;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class ScreenshotUtil {
+    
+    public static String captureScreenshot(String testName) {
+        String dateName = new SimpleDateFormat("yyyy/MM/dd/hh:mm:ss").format(new Date());
+        TakesScreenshot ts = (TakesScreenshot) TestBase.driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String destination = System.getProperty("user.dir") + "/test-output/screenshots/" + testName + "_" + dateName + ".png";
+        File finalDestination = new File(destination);
+        try {
+            FileUtils.copyFile(source, finalDestination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return destination;
+    }
+} 
